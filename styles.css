@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+}
+
+    .details {
+        text-align: center;
+        margin-bottom: 50px; /* Increase space between the text and the clock */
+        color: #fff;
+    }
+    
+    .details h1 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 2.5em; /* Increased size for prominence */
+        margin-bottom: 15px;
+    }
+    
+    .details p {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        max-width: 700px; /* Increased width for readability */
+        margin: 0 auto; /* Center the text block */
+        line-height: 1.6;
+    }
+
+
+.clock {
+    position: relative;
+    width: 400px; /* Adjusted from 200px to 400px */
+    height: 400px; /* Adjusted from 200px to 400px */
+    background-image: url(img/rolex-dial.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    animation: floatAnimation 5s infinite;
+    /* box-shadow: 0 0 100px #d4af37, 0 0 10px #d4af37, 0 0 15px #d4af37, 0 0 20px #d4af37, 0 0 25px #d4af37; */
+}
+
+.clock:before {
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none; /* to not interfere with the hands */
+}
+
+.hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 100%; 
+    z-index: 5;
+}
+
+.hour-hand, .minute-hand {
+    transition: transform 0.3s cubic-bezier(0.4, 2.3, 0.3, 1);
+}
+
+
+
+.hour-hand, .minute-hand, .second-hand {
+    box-shadow: 0 0 5px rgba(150, 0, 0, 0.626);
+}
+
+
+
+.hour-hand {
+    width: 4px;
+    height: 25%;
+    margin-top: -25%; 
+    margin-left: -2px; 
+    background: #000;
+}
+
+.minute-hand {
+    width: 2px;
+    height: 35%;
+    margin-top: -35%; 
+    margin-left: -1px; 
+    background: #000;
+}
+
+.second-hand {
+    width: 1px;
+    height: 33%; /* Reduced slightly to accommodate the arrow tip */
+    margin-top: -36%; /* Adjusted to ensure it centers correctly */
+    background-color: red;
+    z-index: 2;
+}
+
+
+/*add the circualar counterweight at the base */
+.second-hand::after {
+    content: "";
+    position: absolute;
+    top: -2%;
+    left: 40%;
+    transform: translateX(-50%) rotate(45deg); /* Center and rotate to create an arrow */
+    width: 9px;
+    height: 9px;
+    background-color: red; /* Same color as the second hand */
+    clip-path: polygon(100% 0, 0 50%, 100% 100%); /* Create a triangular shape pointing upward */
+}
+
+.second-hand::before {
+    content: "";
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+/* Central Pin */
+.central-pin {
+    position: absolute;
+    top: 47%;
+    left: 47%;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 20;
+}
+
+/* Hour Markings */
+.marking {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 2px;
+    background-color: #000;
+    transform-origin: center;
+    z-index: 5;
+}
+
+
+/* Glass Gradient Animation */
+.clock .glass {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background: linear-gradient(60deg, rgba(255,255,255,0.2), transparent, rgba(255,255,255,0.2));
+    pointer-events: none; /* ensures that the gradient doesn't interfere with clock hands' interaction */
+    animation: gradientMotion 6s infinite alternate;
+    z-index: 15;
+}
+
+@keyframes gradientMotion {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+body {
+    /* ... */
+    background: linear-gradient(45deg, #3a3a3a, #1c1c1c, #3a3a3a, #1c1c1c);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.pivot-point {
+    position: absolute;
+    top: 49%;
+    left: 49.2%;
+    width: 31px;
+    height: 30px;
+    margin-top: -12px; /* Half of the width to center it */
+    margin-left: -12px; /* Half of the height to center it */
+    background: radial-gradient(circle, #fff, #ddd, #bbb, #999);
+    border-radius: 50%;
+    z-index: 6; /* To ensure it's above the hands */
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.8); /* Add some glow */
+}
+
+/* added neumorphism*/
+.details {
+    /* existing styles */
+    background: #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: -5px -5px 10px #2b2b2b, 5px 5px 10px #3b3b3b;
+}
+
+/*floating animation */
+@keyframes floatAnimation {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.details:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s;
+}
+
+* {
+    transition: all 2s ease;
+}
+
+.clock:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.4);
+}
+
+
+
+/* Enterance animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.details, .clock {
+    animation: fadeInUp 1.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body * {
+    animation: fadeIn 2s ease forwards;
+}
+
+* {
+    transition: all 2s ease;
+}
+
+
+
+
+/* Mobile optimization for iPhone 12 Pro and similar dimensions */
+@media only screen and (max-width: 585px) {
+    body {
+        font-size: 14px; /* Adjust base font size for mobile */
+    }
+
+    .details h1 {
+        font-size: 1.8em; /* Reduce heading size */
+    }
+
+    .details p {
+        max-width: 90%; /* Allow text to take up more width for better readability */
+        font-size: 0.9em; /* Adjust paragraph font size */
+    }
+
+    .clock {
+        width: 280px; 
+        height: 280px; /* Reduce clock size to fit mobile screens */
+    }
+}
